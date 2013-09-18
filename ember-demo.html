@@ -12,6 +12,16 @@
       <h1>帳票アプリ</h1>
 
       {{outlet}}
+
+      {{#link-to 'sheets'}}
+        帳票一覧へ
+      {{/link-to}}
+
+      <span> | </span>
+
+      {{#link-to 'index'}}
+        帳票作成へ
+      {{/link-to}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="index">
@@ -32,8 +42,18 @@
       </table>
     </script>
 
+    <script type="text/x-handlebars" data-template-name="sheets">
+      帳票一覧
+    </script>
+
     <script>
       Account = Ember.Application.create();
+
+      Account.SheetsRoute = Ember.Route.extend({});
+
+      Account.Router.map(function() {
+        this.resource('sheets');
+      });
     </script>
 
   </body>
