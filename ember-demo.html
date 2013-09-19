@@ -42,6 +42,8 @@
         </tr>
         {{/each}}
       </table>
+
+      <p>合計 {{total}}</p>
     </script>
 
     <script type="text/x-handlebars" data-template-name="sheets">
@@ -75,6 +77,14 @@
       Account.Sheet = Ember.Object.extend({
         lines:     [],
         createdAt: null,
+
+        total: function() {
+          var subtotals = this.get('lines.@each.subtotal')
+          var total     = subtotals.reduce(function(total, subtotal) {
+            return total + (subtotal || 0);
+          }, 0);
+          return total;
+        }.property('lines.@each.subtotal')
       });
 
       Account.OrderLine = Ember.Object.extend({
