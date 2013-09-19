@@ -38,7 +38,7 @@
           <td>{{input value=productName}}</td>
           <td>{{input type="number" value=unitPrice}}</td>
           <td>{{input type="number" value=count}}</td>
-          <td></td>
+          <td>{{subtotal}}</td>
         </tr>
         {{/each}}
       </table>
@@ -81,6 +81,10 @@
         productname: null,
         unitPrice:   0,
         count:       0,
+
+        subtotal: function() {
+          return this.get('unitPrice') * this.get('count');
+        }.property('unitPrice', 'count')
       });
 
       
