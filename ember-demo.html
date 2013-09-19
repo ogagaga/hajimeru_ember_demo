@@ -54,6 +54,10 @@
         行を追加
       </button>
 
+      <button {{action addSheet}}>
+        登録する
+      </button>
+
     </script>
 
     <script type="text/x-handlebars" data-template-name="sheets">
@@ -77,13 +81,14 @@
         }
       });
 
+      // Router
       Account.SheetsRoute = Ember.Route.extend({});
 
       Account.Router.map(function() {
         this.resource('sheets');
       });
 
-      // model
+      // model define
       Account.Sheet = Ember.Object.extend({
         lines:     [],
         createdAt: null,
@@ -107,6 +112,10 @@
         }.property('unitPrice', 'count')
       });
 
+      // save state
+      Account.Sheet.sheets = [];
+
+      // action
       Account.IndexController = Ember.ObjectController.extend({
         actions: {
           addOrderLine: function() {
@@ -115,7 +124,17 @@
 
           deleteOrderLine: function(orderLine) {
             this.get('lines').removeObject(orderLine);
+          },
+
+          addSheet: function() {
+            var sheet = this.get('model');
+
+            sheet.set('createdAt', new Date());
+            Account.Sheet.sheets.addObject(sheet);
+
+            this.transitionToRoute('sheets');
           }
+
         }
       });
     </script>
