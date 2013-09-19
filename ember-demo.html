@@ -43,7 +43,7 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="sheets">
-      帳票一覧
+      <p>帳票一覧</p>
     </script>
 
     <script>
@@ -54,6 +54,20 @@
       Account.Router.map(function() {
         this.resource('sheets');
       });
+
+      // model
+      Account.Sheet = Ember.Object.extend({
+        lines:     [],
+        createdAt: null,
+      });
+
+      Account.OrderLine = Ember.Object.extend({
+        productname: null,
+        unitPrice:   0,
+        count:       0,
+      });
+
+      
     </script>
 
   </body>
