@@ -33,12 +33,14 @@
           <th>個数</th>
           <th>小計</th>
         </tr>
+        {{#each lines}}
         <tr>
-          <td>{{input}}</td>
-          <td>{{input type="number"}}</td>
-          <td>{{input type="number"}}</td>
+          <td>{{input value=productName}}</td>
+          <td>{{input type="number" value=unitPrice}}</td>
+          <td>{{input type="number" value=count}}</td>
           <td></td>
         </tr>
+        {{/each}}
       </table>
     </script>
 
@@ -48,6 +50,20 @@
 
     <script>
       Account = Ember.Application.create();
+
+      // prepare object for display
+      Account.IndexRoute = Ember.Route.extend({
+        model: function() {
+          var sheet = Account.Sheet.create({
+          lines: [
+            Account.OrderLine.create(),
+            Account.OrderLine.create()
+            ]
+          });
+
+        return sheet;
+        }
+      });
 
       Account.SheetsRoute = Ember.Route.extend({});
 
