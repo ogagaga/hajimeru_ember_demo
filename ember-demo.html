@@ -39,6 +39,11 @@
           <td>{{input type="number" value=unitPrice}}</td>
           <td>{{input type="number" value=count}}</td>
           <td>{{subtotal}}</td>
+          <td>
+            <button {{action deleteOrderLine this}}>
+              削除
+            </button>
+          </td>
         </tr>
         {{/each}}
       </table>
@@ -106,6 +111,10 @@
         actions: {
           addOrderLine: function() {
             this.get('lines').addObject(Account.OrderLine.create());
+          },
+
+          deleteOrderLine: function(orderLine) {
+            this.get('lines').removeObject(orderLine);
           }
         }
       });
