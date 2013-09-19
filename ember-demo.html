@@ -44,6 +44,11 @@
       </table>
 
       <p>合計 {{total}}</p>
+
+      <button {{action addOrderLine}}>
+        行を追加
+      </button>
+
     </script>
 
     <script type="text/x-handlebars" data-template-name="sheets">
@@ -97,7 +102,13 @@
         }.property('unitPrice', 'count')
       });
 
-      
+      Account.IndexController = Ember.ObjectController.extend({
+        actions: {
+          addOrderLine: function() {
+            this.get('lines').addObject(Account.OrderLine.create());
+          }
+        }
+      });
     </script>
 
   </body>
